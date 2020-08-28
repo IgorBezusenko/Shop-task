@@ -20,16 +20,15 @@ class Counter extends Component {
   };
 
   onResetClick = () => {
-    let correntCount = this.state.count;
     this.setState({
-      count: correntCount * 0,
+      count: 0,
     });
   };
 
   render() {
     return (
       <div style={{ width: "400px" }} className="container">
-        <h1 className="">Счетчик {this.state.count}</h1>
+        <h1 className="title">Счетчик {this.state.count}</h1>
         <div className="button-group d-flex">
           <button
             onClick={this.onIncClick}
