@@ -6,22 +6,26 @@ class Counter extends Component {
   };
 
   onIncClick = () => {
-    let correntCount = this.state.count;
-    this.setState({
-      count: correntCount + 1,
+    this.setState((state) => {
+      return {
+        count: state.count + 1,
+      };
     });
   };
 
   onDecClick = () => {
-    let correntCount = this.state.count;
-    this.setState({
-      count: correntCount - 1,
+    this.setState((state) => {
+      return {
+        count: state.count - 1,
+      };
     });
   };
 
   onResetClick = () => {
-    this.setState({
-      count: 0,
+    this.setState((state) => {
+      return {
+        count: state.count * 0,
+      };
     });
   };
 
