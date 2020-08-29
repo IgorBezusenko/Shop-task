@@ -14,3 +14,14 @@ ul {
 .item {
   border: none;
 }
+.list-group-item-name {
+  align-items: center;
+  cursor: pointer;
+}
+.list-group-item.done .list-group-item-name {
+  text-decoration-line: line-through;
+}
+.list-group-item.important .list-group-item-name {
+  font-weight: bold;
+  color: steelblue;
+}
