@@ -2,29 +2,15 @@ import React, { Component } from "react";
 import "../../index.css";
 
 export default class TodoListItem extends Component {
-  state = {
-    done: false,
-    important: false,
-  };
-
-  onItemDone = () => {
-    this.setState((state) => {
-      return {
-        done: !state.done,
-      };
-    });
-  };
-  onItemImportant = () => {
-    this.setState((state) => {
-      return {
-        important: !state.important,
-      };
-    });
-  };
-
   render() {
-    const { name, onItemDeleted } = this.props;
-    const { done, important } = this.state;
+    const {
+      text,
+      onItemDeleted,
+      onToggleDone,
+      onToggleImportant,
+      done,
+      important,
+    } = this.props;
 
     let classItem = "list-group-item";
     if (done) {
@@ -36,12 +22,12 @@ export default class TodoListItem extends Component {
 
     return (
       <div className={classItem}>
-        <span onClick={this.onItemDone} className="list-group-item-name">
-          {name}
+        <span onClick={onToggleDone} className="list-group-item-name">
+          {text}
         </span>
         <div className=" float-right ">
           <i
-            onClick={this.onItemImportant}
+            onClick={onToggleImportant}
             className="btn btn-success fa fa-info  mr-1"
           />
           <i onClick={onItemDeleted} className="btn btn-danger fa fa-trash " />

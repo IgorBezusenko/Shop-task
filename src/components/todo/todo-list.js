@@ -3,12 +3,13 @@ import TodoListItem from "./todo-list-item";
 import "../../index.css";
 
 export default class TodoList extends Component {
-  // onDeleted = () => {
-  //   console.log("del", this.state.items.id);
-  // };
-
   render() {
-    const { items, onItemDeleted } = this.props;
+    const {
+      items,
+      onItemDeleted,
+      onToggleDone,
+      onToggleImportant,
+    } = this.props;
 
     const elements = items.map((item) => {
       const { id, ...itemProps } = item;
@@ -18,6 +19,8 @@ export default class TodoList extends Component {
           <TodoListItem
             {...itemProps}
             onItemDeleted={() => onItemDeleted(id)}
+            onToggleDone={() => onToggleDone(id)}
+            onToggleImportant={() => onToggleImportant(id)}
           />
         </li>
       );

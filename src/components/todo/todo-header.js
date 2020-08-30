@@ -1,10 +1,17 @@
 import React from "react";
 
-const TodoHeader = () => {
+const TodoHeader = ({ totalItems, doneCount, doneImportant }) => {
   return (
-    <h1 style={{ width: "300px" }} className="mx-auto">
-      My Todo App
-    </h1>
+    <div className="d-flex justify-content-between">
+      <div>
+        <h1>My Todo App</h1>
+      </div>
+      <div className="d-flex flex-column">
+        <span>Total items: {totalItems}</span>
+        <span>Done: {doneCount}</span>
+        <span>Imtortamt: {doneImportant}</span>
+      </div>
+    </div>
   );
 };
 

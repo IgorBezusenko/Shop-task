@@ -10,18 +10,9 @@ export default class TodoApp extends Component {
 
   state = {
     items: [
-      {
-        id: 0,
-        name: "Устроиться на работу",
-      },
-      {
-        id: 1,
-        name: "Купить ноутбук",
-      },
-      {
-        id: 2,
-        name: "Развиваться",
-      },
+      this.createTodoItem("Устроится на работу"),
+      this.createTodoItem("Купить ноутбук"),
+      this.createTodoItem("Развиватся"),
     ],
   };
 
@@ -34,12 +25,17 @@ export default class TodoApp extends Component {
     });
   };
 
-  addItem = (value) => {
-    console.log("Add Item", value);
-    const newItem = {
+  createTodoItem(text) {
+    return {
+      text,
       id: this.generId++,
-      name: value,
+      done: false,
+      important: false,
     };
+  }
+
+  addItem = (text) => {
+    const newItem = this.createTodoItem(text);
     this.setState(({ items }) => {
       const newArr = [...items, newItem];
       return {
@@ -48,15 +44,66 @@ export default class TodoApp extends Component {
     });
   };
 
+  onToggleDone = (id) => {
+    this.setState(({ items }) => {
+      const idx = items.findIndex((el) => el.id === id);
+
+      const oldItem = items[idx];
+      const newItem = { ...oldItem, done: !oldItem.done };
+
+      const newItems = [
+        ...items.slice(0, idx),
+        newItem,
+        ...items.slice(idx + 1),
+      ];
+      return {
+        items: newItems,
+      };
+    });
+  };
+  onToggleImportant = (id) => {
+    console.log("Important", id);
+    this.setState(({ items }) => {
+      const idx = items.findIndex((el) => el.id === id);
+
+      const oldItem = items[idx];
+      const newItem = { ...oldItem, important: !oldItem.important };
+
+      const newItems = [
+        ...items.slice(0, idx),
+        newItem,
+        ...items.slice(idx + 1),
+      ];
+      return {
+        items: newItems,
+      };
+    });
+  };
+
   render() {
+    const { items } = this.state;
+
+    const totalCount = items.length;
+    const doneCount = items.filter((el) => el.done).length;
+    const doneImportant = items.filter((el) => el.important).length;
+
     return (
       <div style={{ width: "500px" }} className="container">
-        <TodoHeader />
+        <TodoHeader
+          totalItems={totalCount}
+          doneCount={doneCount}
+          doneImportant={doneImportant}
+        />
         <div className="d-flex justify-content-between mb-2">
           <TodoSearch />
           <TodoFilter />
         </div>
-        <TodoList items={this.state.items} onItemDeleted={this.deletedItem} />
+        <TodoList
+          items={items}
+          onItemDeleted={this.deletedItem}
+          onToggleDone={this.onToggleDone}
+          onToggleImportant={this.onToggleImportant}
+        />
         <TodoAddItemForm onItemAdd={this.addItem} />
       </div>
     );

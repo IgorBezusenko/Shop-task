@@ -10,7 +10,6 @@ const App = () => {
     <Router>
       <Header />
       <div>
-        <h1>Якатэла</h1>
         <Route path="/counter" exact component={Counter} />
         <Route path="/todoApp" component={TodoApp} />
       </div>
