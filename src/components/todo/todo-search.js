@@ -1,9 +1,24 @@
 import React, { Component } from "react";
 
 export default class TodoSearch extends Component {
+  state = {
+    term: "",
+  };
+
+  onChangeSerch = (e) => {
+    const termItput = e.target.value;
+    this.setState({ term: termItput });
+    this.props.onChangeSerch(termItput);
+  };
   render() {
     return (
-      <input type="text" placeholder="Search..." className="w-100  mr-2" />
+      <input
+        onChange={this.onChangeSerch}
+        type="text"
+        value={this.state.term}
+        placeholder="Search..."
+        className="form-control mr-2"
+      />
     );
   }
 }

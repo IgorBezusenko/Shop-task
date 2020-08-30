@@ -14,6 +14,7 @@ export default class TodoApp extends Component {
       this.createTodoItem("Купить ноутбук"),
       this.createTodoItem("Развиватся"),
     ],
+    term: "",
   };
 
   deletedItem = (id) => {
@@ -62,7 +63,6 @@ export default class TodoApp extends Component {
     });
   };
   onToggleImportant = (id) => {
-    console.log("Important", id);
     this.setState(({ items }) => {
       const idx = items.findIndex((el) => el.id === id);
 
@@ -80,10 +80,25 @@ export default class TodoApp extends Component {
     });
   };
 
-  render() {
-    const { items } = this.state;
+  onChangeSerch = (term) => {
+    this.setState({ term });
+  };
 
-    const totalCount = items.length;
+  serchItems(items, term) {
+    if (term.length === 0) {
+      return items;
+    }
+
+    return items.filter((item) => {
+      return item.text.toLowerCase().indexOf(term.toLowerCase()) > -1;
+    });
+  }
+
+  render() {
+    const { items, term } = this.state;
+
+    const visibleItems = this.serchItems(items, term);
+    const totalCount = visibleItems.length;
     const doneCount = items.filter((el) => el.done).length;
     const doneImportant = items.filter((el) => el.important).length;
 
@@ -96,14 +111,14 @@ export default class TodoApp extends Component {
         />
 
         <div className="d-flex  mb-2">
-          <TodoSearch />
+          <TodoSearch onChangeSerch={this.onChangeSerch} />
           <TodoFilter />
         </div>
 
         <TodoAddItemForm onItemAdd={this.addItem} />
 
         <TodoList
-          items={items}
+          items={visibleItems}
           onItemDeleted={this.deletedItem}
           onToggleDone={this.onToggleDone}
           onToggleImportant={this.onToggleImportant}
