@@ -8,24 +8,22 @@ export default class TodoListItem extends Component {
   };
 
   onItemDone = () => {
-    console.log("клик Done", this.props.name);
     this.setState((state) => {
       return {
-        done: !this.state.done,
+        done: !state.done,
       };
     });
   };
   onItemImportant = () => {
-    console.log("клик Important", this.props.name);
     this.setState((state) => {
       return {
-        important: !this.state.important,
+        important: !state.important,
       };
     });
   };
 
   render() {
-    const { id, name } = this.props;
+    const { name, onItemDeleted } = this.props;
     const { done, important } = this.state;
 
     let classItem = "list-group-item";
@@ -37,7 +35,7 @@ export default class TodoListItem extends Component {
     }
 
     return (
-      <li key={id} className={classItem}>
+      <div className={classItem}>
         <span onClick={this.onItemDone} className="list-group-item-name">
           {name}
         </span>
@@ -46,9 +44,9 @@ export default class TodoListItem extends Component {
             onClick={this.onItemImportant}
             className="btn btn-success fa fa-info  mr-1"
           />
-          <i className="btn btn-danger fa fa-trash " />
+          <i onClick={onItemDeleted} className="btn btn-danger fa fa-trash " />
         </div>
-      </li>
+      </div>
     );
   }
 }
