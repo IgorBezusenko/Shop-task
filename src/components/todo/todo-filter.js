@@ -1,19 +1,29 @@
 import React, { Component } from "react";
 
 export default class TodoFilter extends Component {
+  buttonGroup = [
+    { name: "all", text: "All" },
+    { name: "important", text: "Important" },
+    { name: "done", text: "Done" },
+  ];
+
   render() {
-    return (
-      <div className="btn-group" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-secondary">
-          All
+    const { filter, onFilterItem } = this.props;
+    const buttons = this.buttonGroup.map(({ name, text }) => {
+      const isActive = filter === name;
+      const classActive = isActive ? "btn-info" : "btn-outline-secondary";
+      return (
+        <button
+          key={name}
+          type="button"
+          className={`btn ${classActive}`}
+          onClick={() => onFilterItem(name)}
+        >
+          {text}
         </button>
-        <button type="button" className="btn btn-secondary">
-          Done
-        </button>
-        <button type="button" className="btn btn-secondary">
-          Important
-        </button>
-      </div>
-    );
+      );
+    });
+
+    return <div className="btn-group">{buttons}</div>;
   }
 }

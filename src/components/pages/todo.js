@@ -15,6 +15,7 @@ export default class TodoApp extends Component {
       this.createTodoItem("Развиватся"),
     ],
     term: "",
+    filter: "all",
   };
 
   deletedItem = (id) => {
@@ -84,20 +85,36 @@ export default class TodoApp extends Component {
     this.setState({ term });
   };
 
+  onFilterItem = (filter) => {
+    this.setState({ filter });
+  };
+
   serchItems(items, term) {
     if (term.length === 0) {
       return items;
     }
-
     return items.filter((item) => {
       return item.text.toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
   }
 
-  render() {
-    const { items, term } = this.state;
+  filterItem(items, filter) {
+    switch (filter) {
+      case "all":
+        return items;
+      case "important":
+        return items.filter((item) => item.important);
+      case "done":
+        return items.filter((item) => item.done);
+      default:
+        return items;
+    }
+  }
 
-    const visibleItems = this.serchItems(items, term);
+  render() {
+    const { items, term, filter } = this.state;
+
+    const visibleItems = this.filterItem(this.serchItems(items, term), filter);
     const totalCount = visibleItems.length;
     const doneCount = items.filter((el) => el.done).length;
     const doneImportant = items.filter((el) => el.important).length;
@@ -112,7 +129,7 @@ export default class TodoApp extends Component {
 
         <div className="d-flex  mb-2">
           <TodoSearch onChangeSerch={this.onChangeSerch} />
-          <TodoFilter />
+          <TodoFilter filter={filter} onFilterItem={this.onFilterItem} />
         </div>
 
         <TodoAddItemForm onItemAdd={this.addItem} />

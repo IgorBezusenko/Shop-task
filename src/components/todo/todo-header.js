@@ -8,8 +8,8 @@ const TodoHeader = ({ totalItems, doneCount, doneImportant }) => {
       </div>
       <div className="d-flex flex-column">
         <span>Total items: {totalItems}</span>
-        <span>Done: {doneCount}</span>
         <span>Imtortamt: {doneImportant}</span>
+        <span>Done: {doneCount}</span>
       </div>
     </div>
   );
