@@ -14,6 +14,7 @@ ul {
 .item {
   border: none;
 }
+
 .list-group-item-name {
   align-items: center;
   cursor: pointer;

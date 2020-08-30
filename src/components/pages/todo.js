@@ -88,23 +88,26 @@ export default class TodoApp extends Component {
     const doneImportant = items.filter((el) => el.important).length;
 
     return (
-      <div style={{ width: "500px" }} className="container">
+      <div style={{ width: "600px" }} className="container">
         <TodoHeader
           totalItems={totalCount}
           doneCount={doneCount}
           doneImportant={doneImportant}
         />
-        <div className="d-flex justify-content-between mb-2">
+
+        <div className="d-flex  mb-2">
           <TodoSearch />
           <TodoFilter />
         </div>
+
+        <TodoAddItemForm onItemAdd={this.addItem} />
+
         <TodoList
           items={items}
           onItemDeleted={this.deletedItem}
           onToggleDone={this.onToggleDone}
           onToggleImportant={this.onToggleImportant}
         />
-        <TodoAddItemForm onItemAdd={this.addItem} />
       </div>
     );
   }

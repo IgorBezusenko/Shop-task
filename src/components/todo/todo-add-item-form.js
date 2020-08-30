@@ -1,17 +1,38 @@
 import React, { Component } from "react";
-
+import "../../index.css";
 export default class TodoAddItemForm extends Component {
+  state = {
+    text: "",
+  };
+
+  onItemChange = (e) => {
+    this.setState({
+      text: e.target.value,
+    });
+  };
+
+  onItemSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.text) {
+      this.props.onItemAdd(this.state.text);
+      this.setState({
+        text: "",
+      });
+    }
+  };
+
   render() {
-    const { onItemAdd } = this.props;
     return (
-      <div className="mt-2">
-        <button
-          onClick={() => onItemAdd("Привет Сцуки")}
-          className="btn btn-secondary"
-        >
-          Add Item
-        </button>
-      </div>
+      <form className="d-flex" onSubmit={this.onItemSubmit}>
+        <input
+          type="text"
+          value={this.state.text}
+          placeholder="Write a note..."
+          className="form-control mr-2"
+          onChange={this.onItemChange}
+        />
+        <button className="btn btn-primary w-25">Add Item</button>
+      </form>
     );
   }
 }
