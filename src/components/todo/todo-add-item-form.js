@@ -23,7 +23,7 @@ export default class TodoAddItemForm extends Component {
 
   render() {
     return (
-      <form className="d-flex" onSubmit={this.onItemSubmit}>
+      <form className="d-flex mb-2" onSubmit={this.onItemSubmit}>
         <input
           type="text"
           value={this.state.text}
