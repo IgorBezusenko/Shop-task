@@ -3,8 +3,24 @@ import React, { Component } from "react";
 import "./store.css";
 
 export default class ShoesListItem extends Component {
+  state = { view: "none" };
+
+  onViewItem = (id) => {
+    console.log("View", id);
+    this.setState({
+      view: "block",
+    });
+  };
+
+  onCloseViewItem = (id) => {
+    console.log("close", id);
+    this.setState({
+      view: "none",
+    });
+  };
+
   render() {
-    const { name, price, description, image } = this.props;
+    const { id, name, price, description, image } = this.props;
 
     return (
       <div className="shoes-list-item">
@@ -17,13 +33,22 @@ export default class ShoesListItem extends Component {
             <li>Description: {description}</li>
             <li>Price: {price} $</li>
             <li>
-              <button className="btn btn-info mr-2">View</button>
+              <button
+                onClick={() => this.onViewItem(id)}
+                className="btn btn-info mr-2"
+              >
+                View
+              </button>
               <button className="btn btn-primary">Add to Cart</button>
             </li>
           </ul>
         </div>
 
-        <div className="modal" tabindex="-1">
+        <div
+          style={{ display: this.state.view }}
+          className="modal"
+          tabIndex="-1"
+        >
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -34,7 +59,12 @@ export default class ShoesListItem extends Component {
                   data-dismiss="modal"
                   aria-label="Close"
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <span
+                    onClick={() => this.onCloseViewItem(id)}
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </span>
                 </button>
               </div>
               <div className="modal-body">
@@ -43,11 +73,12 @@ export default class ShoesListItem extends Component {
                 </div>
                 <ul>
                   <li>Description: {description}</li>
-                  <li> Price: {price}</li>
+                  <li> Price: {price} $</li>
                 </ul>
               </div>
               <div className="modal-footer">
                 <button
+                  onClick={() => this.onCloseViewItem(id)}
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"

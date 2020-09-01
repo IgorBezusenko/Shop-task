@@ -17,7 +17,7 @@ export default class ShoesHeader extends Component {
           </button>
         </div>
         {/* 
-        <div class="modal header-cart-modal" tabindex="0">
+        <div class="modal header-cart-modal" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">

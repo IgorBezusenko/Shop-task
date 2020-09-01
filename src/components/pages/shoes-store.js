@@ -4,15 +4,14 @@ import * as shoesState from "../../store.json";
 import ShoesHeader from "../shoes-shore/store-header";
 
 export default class ShoesStore extends Component {
-  state = { shoesState: shoesState.items, totalItem: [] };
+  state = { shoesState: shoesState.items, totalItem: 0 };
 
   render() {
-    const { shoesState } = this.state;
+    const { shoesState, totalItem } = this.state;
 
-    console.log(shoesState);
     return (
       <div className="container">
-        <ShoesHeader />
+        <ShoesHeader totalItem={totalItem} />
         <ShoesList items={shoesState} />
       </div>
     );
