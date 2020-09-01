@@ -23,17 +23,26 @@ export default class ShoesStore extends Component {
     });
   };
 
-  onViewItem = (id) => {
+  onCloseModal = (item) => {
     this.setState({
-      viewItem: "block",
+      modalVisible: false,
+    });
+    this.setState({
+      modalItem: item,
     });
   };
 
-  onCloseViewItem = () => {
-    this.setState({
-      viewItem: "none",
-    });
-  };
+  // onViewItem = (id) => {
+  //   this.setState({
+  //     viewItem: "block",
+  //   });
+  // };
+
+  // onCloseViewItem = () => {
+  //   this.setState({
+  //     viewItem: "none",
+  //   });
+  // };
 
   render() {
     const {
@@ -56,7 +65,9 @@ export default class ShoesStore extends Component {
           totalItem={totalItem}
         />
 
-        {modalVisible ? <ModalItem item={modalItem} /> : null}
+        {modalVisible ? (
+          <ModalItem item={modalItem} onCloseModal={this.onCloseModal} />
+        ) : null}
       </div>
     );
   }

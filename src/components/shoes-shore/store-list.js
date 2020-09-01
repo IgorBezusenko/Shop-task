@@ -10,7 +10,7 @@ const ShoesList = ({ items, viewItem, onViewItem, onCloseViewItem }) => {
         <ShoesListItem
           {...itemProps}
           viewItem={viewItem}
-          onViewItem={() => onViewItem(id)}
+          onViewItem={() => onViewItem(item)}
           onCloseViewItem={() => onCloseViewItem(id)}
         />
       </li>

@@ -1,22 +1,26 @@
 import React from "react";
 
-const ModalItem = (item) => {
+import "./store.css";
+
+const ModalItem = ({ item, onCloseModal }) => {
   console.log(item);
   const { name, price, description, image } = item;
+  console.log(name);
 
   return (
-    <div className="modal" tabIndex="-1">
+    <div className="modal-item" tabIndex="-1">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{name}</h5>
             <button
+              onClick={onCloseModal}
               type="button"
-              className="close"
+              className="btn btn-outline-primary"
               data-dismiss="modal"
               aria-label="Close"
             >
-              <span aria-hidden="true">&times;</span>
+              <i className="fa fa-window-close"></i>
             </button>
           </div>
           <div className="modal-body">
@@ -30,6 +34,7 @@ const ModalItem = (item) => {
           </div>
           <div className="modal-footer">
             <button
+              onClick={onCloseModal}
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
