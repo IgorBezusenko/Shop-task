@@ -1,25 +1,33 @@
 import React, { Component } from "react";
 
 import "./store.css";
+// state = { viewItems: "none" };
+
+// onViewItem = () => {
+//   this.setState({
+//     viewItem: "block",
+//   });
+// };
+
+// onCloseViewItem = () => {
+//   this.setState({
+//     viewItem: "none",
+//   });
+// };
 
 export default class ShoesListItem extends Component {
-  state = { viewItem: "none" };
-
-  onViewItem = () => {
-    this.setState({
-      viewItem: "block",
-    });
-  };
-
-  onCloseViewItem = () => {
-    this.setState({
-      viewItem: "none",
-    });
-  };
-
   render() {
-    const { id, name, price, description, image } = this.props;
+    const {
+      name,
+      price,
+      description,
+      image,
+      viewItem,
+      onViewItem,
+      onCloseViewItem,
+    } = this.props;
 
+    console.log(viewItem);
     return (
       <div className="shoes-list-item">
         <div className="item-image">
@@ -31,10 +39,7 @@ export default class ShoesListItem extends Component {
             <li>Description: {description}</li>
             <li>Price: {price} $</li>
             <li>
-              <button
-                onClick={() => this.onViewItem(id)}
-                className="btn btn-info mr-2"
-              >
+              <button onClick={onViewItem} className="btn btn-info mr-2">
                 View
               </button>
               <button className="btn btn-primary">Add to Cart</button>
@@ -42,11 +47,7 @@ export default class ShoesListItem extends Component {
           </ul>
         </div>
 
-        <div
-          style={{ display: this.state.viewItem }}
-          className="modal"
-          tabIndex="-1"
-        >
+        <div style={{ display: viewItem }} className="modal" tabIndex="-1">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -57,10 +58,7 @@ export default class ShoesListItem extends Component {
                   data-dismiss="modal"
                   aria-label="Close"
                 >
-                  <span
-                    onClick={() => this.onCloseViewItem(id)}
-                    aria-hidden="true"
-                  >
+                  <span onClick={onCloseViewItem} aria-hidden="true">
                     &times;
                   </span>
                 </button>
@@ -76,7 +74,7 @@ export default class ShoesListItem extends Component {
               </div>
               <div className="modal-footer">
                 <button
-                  onClick={() => this.onCloseViewItem(id)}
+                  onClick={onCloseViewItem}
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"

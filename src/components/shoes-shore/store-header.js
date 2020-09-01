@@ -20,7 +20,6 @@ export default class ShoesHeader extends Component {
   };
 
   render() {
-    const { items } = this.props;
     const { cartItems } = this.state;
 
     const element = cartItems.map((item, index) => {

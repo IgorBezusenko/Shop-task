@@ -1,13 +1,19 @@
 import React from "react";
 import ShoesListItem from "./store-list-item";
 
-const ShoesList = ({ items }) => {
+const ShoesList = ({ items, viewItem, onViewItem, onCloseViewItem }) => {
   const element = items.map((item) => {
     const { id, ...itemProps } = item;
 
     return (
       <li key={id} className="ml-3 mb-3">
-        <ShoesListItem {...itemProps} id={id} />
+        <ShoesListItem
+          {...itemProps}
+          id={id}
+          viewItem={viewItem}
+          onViewItem={() => onViewItem(id)}
+          onCloseViewItem={() => onCloseViewItem(id)}
+        />
       </li>
     );
   });
