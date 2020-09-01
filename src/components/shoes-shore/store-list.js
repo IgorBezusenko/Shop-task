@@ -9,7 +9,6 @@ const ShoesList = ({ items, viewItem, onViewItem, onCloseViewItem }) => {
       <li key={id} className="ml-3 mb-3">
         <ShoesListItem
           {...itemProps}
-          id={id}
           viewItem={viewItem}
           onViewItem={() => onViewItem(id)}
           onCloseViewItem={() => onCloseViewItem(id)}

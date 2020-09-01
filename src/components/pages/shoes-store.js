@@ -2,12 +2,28 @@ import React, { Component } from "react";
 import ShoesList from "../shoes-shore/store-list";
 import * as shoesState from "../../store.json";
 import ShoesHeader from "../shoes-shore/store-header";
+import ModalItem from "../shoes-shore/modal-item";
 
 export default class ShoesStore extends Component {
-  state = { shoesState: shoesState.items, totalItem: 0, viewItem: "none" };
+  state = {
+    shoesState: shoesState.items,
+    totalItem: 0,
+    viewItem: "none",
+    modalVisible: false,
+    modalItem: {},
+  };
+
+  onViewModal = (item) => {
+    this.setState({
+      modalVisible: true,
+    });
+
+    this.setState({
+      modalItem: item,
+    });
+  };
 
   onViewItem = (id) => {
-    console.log("view", id);
     this.setState({
       viewItem: "block",
     });
@@ -20,7 +36,13 @@ export default class ShoesStore extends Component {
   };
 
   render() {
-    const { shoesState, totalItem, viewItem } = this.state;
+    const {
+      shoesState,
+      totalItem,
+      viewItem,
+      modalVisible,
+      modalItem,
+    } = this.state;
 
     return (
       <div className="container">
@@ -29,10 +51,12 @@ export default class ShoesStore extends Component {
         <ShoesList
           items={shoesState}
           viewItem={viewItem}
-          onViewItem={this.onViewItem}
+          onViewItem={this.onViewModal}
           onCloseViewItem={this.onCloseViewItem}
           totalItem={totalItem}
         />
+
+        {modalVisible ? <ModalItem item={modalItem} /> : null}
       </div>
     );
   }
