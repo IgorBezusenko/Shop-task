@@ -3,19 +3,17 @@ import React, { Component } from "react";
 import "./store.css";
 
 export default class ShoesListItem extends Component {
-  state = { view: "none" };
+  state = { viewItem: "none" };
 
-  onViewItem = (id) => {
-    console.log("View", id);
+  onViewItem = () => {
     this.setState({
-      view: "block",
+      viewItem: "block",
     });
   };
 
-  onCloseViewItem = (id) => {
-    console.log("close", id);
+  onCloseViewItem = () => {
     this.setState({
-      view: "none",
+      viewItem: "none",
     });
   };
 
@@ -25,7 +23,7 @@ export default class ShoesListItem extends Component {
     return (
       <div className="shoes-list-item">
         <div className="item-image">
-          <img src={image} alt="Image-shoes" />
+          <img src={image} alt="cover" />
         </div>
         <div>
           <ul>
@@ -45,7 +43,7 @@ export default class ShoesListItem extends Component {
         </div>
 
         <div
-          style={{ display: this.state.view }}
+          style={{ display: this.state.viewItem }}
           className="modal"
           tabIndex="-1"
         >
@@ -69,7 +67,7 @@ export default class ShoesListItem extends Component {
               </div>
               <div className="modal-body">
                 <div className="item-image">
-                  <img src={image} alt="Image-shoes" />
+                  <img src={image} alt="cover" />
                 </div>
                 <ul>
                   <li>Description: {description}</li>

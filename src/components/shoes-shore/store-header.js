@@ -3,7 +3,42 @@ import React, { Component } from "react";
 import "./store.css";
 
 export default class ShoesHeader extends Component {
+  state = {
+    cartItems: [],
+    viewCart: "none",
+  };
+
+  onViewCart = () => {
+    this.setState({
+      viewCart: "block",
+    });
+  };
+  onCloseViewCart = () => {
+    this.setState({
+      viewCart: "none",
+    });
+  };
+
   render() {
+    const { items } = this.props;
+    const { cartItems } = this.state;
+
+    const element = cartItems.map((item, index) => {
+      const { id, name, price } = item;
+      return (
+        <tr key={id}>
+          <th scope="row">{index + 1}</th>
+          <td>{name}</td>
+          <td>{price}</td>
+          <td>
+            <button className="btn btn-outline-danger ">
+              <i className="fa fa-trash" />
+            </button>
+          </td>
+        </tr>
+      );
+    });
+
     return (
       <header className="header container">
         <div className="header-logo">
@@ -11,83 +46,48 @@ export default class ShoesHeader extends Component {
         </div>
         <div className="header-cart">
           <span className="mr-3">Tottal: {0}</span>
-          <button className="btn btn-success">
+          <button onClick={this.onViewCart} className="btn btn-success">
             <i className="fa fa-shopping-cart mr-2" />
             Cart
           </button>
         </div>
-        {/* 
-        <div class="modal header-cart-modal" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+
+        <div
+          style={{ display: this.state.viewCart }}
+          className="header-cart-modal"
+          tabIndex="-1"
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Cart with your goods!</h5>
                 <button
+                  onClick={this.onCloseViewCart}
                   type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
+                  className="btn btn-outline-primary"
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <i className="fa fa-window-close"></i>
                 </button>
               </div>
-              <div class="modal-body">
-                <p>Modal body text goes here.</p>
+              <div className="modal-body">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>{element}</tbody>
+                </table>
               </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary">
+                  Buy
                 </button>
               </div>
             </div>
-          </div>
-        </div> */}
-
-        <div className="header-cart-modal">
-          <div className="modal-header">
-            <h5 className="modal-title">Modal title</h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span>&times;</span>
-            </button>
-          </div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>
-                  <button className="btn btn-outline-danger ">
-                    <i className="fa fa-trash" />
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-primary">
-              Buy
-            </button>
           </div>
         </div>
       </header>

@@ -11,7 +11,7 @@ export default class ShoesStore extends Component {
 
     return (
       <div className="container">
-        <ShoesHeader totalItem={totalItem} />
+        <ShoesHeader totalItem={totalItem} items={shoesState} />
         <ShoesList items={shoesState} />
       </div>
     );
