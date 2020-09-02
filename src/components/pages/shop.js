@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ShoesList from "../shoes-shore/store-list";
+import ShoesList from "../shop/store-list";
 import * as shoesState from "../../store.json";
-import ShoesHeader from "../shoes-shore/store-header";
-import ModalItem from "../shoes-shore/modal-item";
-import ModalCart from "../shoes-shore/modal-cart";
+import ShoesHeader from "../shop/store-header";
+import ModalItem from "../shop/modal-item";
+import ModalCart from "../shop/modal-cart";
 
 export default class ShoesStore extends Component {
   state = {
