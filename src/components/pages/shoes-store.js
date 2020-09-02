@@ -3,70 +3,91 @@ import ShoesList from "../shoes-shore/store-list";
 import * as shoesState from "../../store.json";
 import ShoesHeader from "../shoes-shore/store-header";
 import ModalItem from "../shoes-shore/modal-item";
+import ModalCart from "../shoes-shore/modal-cart";
 
 export default class ShoesStore extends Component {
   state = {
     shoesState: shoesState.items,
     totalItem: 0,
-    viewItem: "none",
-    modalVisible: false,
+    modalVisibleItem: false,
     modalItem: {},
+    modalVisibleCart: false,
+    modalCart: {},
   };
 
-  onViewModal = (item) => {
+  onViewModalItem = (item) => {
     this.setState({
-      modalVisible: true,
-    });
-
-    this.setState({
-      modalItem: item,
-    });
-  };
-
-  onCloseModal = (item) => {
-    this.setState({
-      modalVisible: false,
+      modalVisibleItem: true,
     });
     this.setState({
       modalItem: item,
     });
   };
 
-  // onViewItem = (id) => {
-  //   this.setState({
-  //     viewItem: "block",
-  //   });
-  // };
+  onCloseModalItem = (item) => {
+    this.setState({
+      modalVisibleItem: false,
+    });
+    this.setState({
+      modalItem: item,
+    });
+  };
 
-  // onCloseViewItem = () => {
-  //   this.setState({
-  //     viewItem: "none",
-  //   });
-  // };
+  onViewModalCart = () => {
+    this.setState({
+      modalVisibleCart: true,
+    });
+    this.setState({
+      modalCart: this.state.modalCart,
+    });
+  };
+
+  onCloseModalCart = () => {
+    this.setState({
+      modalVisibleCart: false,
+    });
+    this.setState({
+      modalCart: this.state.modalCart,
+    });
+  };
 
   render() {
     const {
       shoesState,
       totalItem,
       viewItem,
-      modalVisible,
+      modalVisibleItem,
       modalItem,
+      modalVisibleCart,
+      modalCart,
     } = this.state;
 
     return (
       <div className="container">
-        <ShoesHeader items={shoesState} />
+        <ShoesHeader
+          items={shoesState}
+          onViewModalCart={this.onViewModalCart}
+        />
 
         <ShoesList
           items={shoesState}
           viewItem={viewItem}
-          onViewItem={this.onViewModal}
-          onCloseViewItem={this.onCloseViewItem}
+          onViewModalItem={this.onViewModalItem}
           totalItem={totalItem}
         />
 
-        {modalVisible ? (
-          <ModalItem item={modalItem} onCloseModal={this.onCloseModal} />
+        {modalVisibleItem ? (
+          <ModalItem
+            item={modalItem}
+            onCloseModalItem={this.onCloseModalItem}
+          />
+        ) : null}
+
+        {modalVisibleCart ? (
+          <ModalCart
+            item={modalCart}
+            onCloseModalCart={this.onCloseModalCart}
+          />
         ) : null}
       </div>
     );
