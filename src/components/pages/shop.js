@@ -32,6 +32,7 @@ export default class ShoesStore extends Component {
       };
     });
   };
+
   deleteFromCart = (id) => {
     this.setState(({ cartState }) => {
       const index = cartState.findIndex((el) => el.id === id);
@@ -106,7 +107,6 @@ export default class ShoesStore extends Component {
     const {
       shoesState,
       totalItem,
-
       modalVisibleItem,
       modalItem,
       modalVisibleCart,
@@ -115,11 +115,18 @@ export default class ShoesStore extends Component {
       alertBuy,
     } = this.state;
 
+    // const tottalPrice = items.filter((el) => el.important).length;
+
+    const itemPrice = cartState.reduce(
+      (total, el) => total + el.price,
+      totalItem
+    );
+
     return (
       <div className="container">
         <ShoesHeader
           items={shoesState}
-          totalItem={totalItem}
+          totalPrice={itemPrice}
           onViewModalCart={this.onViewModalCart}
         />
 

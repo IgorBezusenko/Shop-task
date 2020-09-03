@@ -120,7 +120,7 @@ export default class TodoApp extends Component {
     const doneImportant = items.filter((el) => el.important).length;
 
     return (
-      <div style={{ width: "600px" }} className="container">
+      <div className="container">
         <TodoHeader
           totalItems={totalCount}
           doneCount={doneCount}
