@@ -43,6 +43,12 @@
   height: 300px;
 }
 
+.alert-cart {
+  position: fixed;
+  top: 15%;
+  right: 20%;
+}
+
 ul {
   padding: 0;
 }

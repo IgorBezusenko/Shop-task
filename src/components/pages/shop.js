@@ -82,15 +82,24 @@ export default class ShoesStore extends Component {
   };
 
   onBuy = () => {
-    console.log("Buy");
+    const cartState = this.state.cartState;
 
-    // setTimeout(
-    //   () =>
-    //     this.setState({
-    //       alertBuy: true,
-    //     }),
-    //   3000
-    // );
+    if (cartState.length === 0) {
+      return;
+    } else {
+      this.setState({ alertBuy: true });
+      setTimeout(
+        () =>
+          this.setState({
+            alertBuy: false,
+          }),
+        3000
+      );
+    }
+
+    this.setState({
+      cartState: [],
+    });
   };
 
   render() {
@@ -110,13 +119,13 @@ export default class ShoesStore extends Component {
       <div className="container">
         <ShoesHeader
           items={shoesState}
+          totalItem={totalItem}
           onViewModalCart={this.onViewModalCart}
         />
 
         <ShoesList
           items={shoesState}
           onViewModalItem={this.onViewModalItem}
-          totalItem={totalItem}
           itemCart={cartState}
           addItemToCart={this.addItemToCart}
         />
