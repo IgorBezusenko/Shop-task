@@ -4,8 +4,11 @@ import * as shoesState from "../../store.json";
 import ShoesHeader from "../shop/store-header";
 import ModalItem from "../shop/modal-item";
 import ModalCart from "../shop/modal-cart";
+import AlertBuy from "../shop/alert-buy";
 
 export default class ShoesStore extends Component {
+  cartId = 1000;
+
   state = {
     shoesState: shoesState.items,
     totalItem: 0,
@@ -13,6 +16,33 @@ export default class ShoesStore extends Component {
     modalItem: {},
     modalVisibleCart: false,
     modalCart: {},
+    cartState: [],
+    alertBuy: false,
+  };
+
+  addItemToCart = (item) => {
+    this.setState(({ cartState }) => {
+      const newItem = {
+        id: this.cartId++,
+        name: item.name,
+        price: item.price,
+      };
+      return {
+        cartState: [...cartState, newItem],
+      };
+    });
+  };
+  deleteFromCart = (id) => {
+    this.setState(({ cartState }) => {
+      const index = cartState.findIndex((el) => el.id === id);
+      const newArrCart = [
+        ...cartState.slice(0, index),
+        ...cartState.slice(index + 1),
+      ];
+      return {
+        cartState: newArrCart,
+      };
+    });
   };
 
   onViewModalItem = (item) => {
@@ -51,15 +81,29 @@ export default class ShoesStore extends Component {
     });
   };
 
+  onBuy = () => {
+    console.log("Buy");
+
+    // setTimeout(
+    //   () =>
+    //     this.setState({
+    //       alertBuy: true,
+    //     }),
+    //   3000
+    // );
+  };
+
   render() {
     const {
       shoesState,
       totalItem,
-      viewItem,
+
       modalVisibleItem,
       modalItem,
       modalVisibleCart,
       modalCart,
+      cartState,
+      alertBuy,
     } = this.state;
 
     return (
@@ -71,24 +115,31 @@ export default class ShoesStore extends Component {
 
         <ShoesList
           items={shoesState}
-          viewItem={viewItem}
           onViewModalItem={this.onViewModalItem}
           totalItem={totalItem}
+          itemCart={cartState}
+          addItemToCart={this.addItemToCart}
         />
 
         {modalVisibleItem ? (
           <ModalItem
             item={modalItem}
             onCloseModalItem={this.onCloseModalItem}
+            addItemToCart={() => this.addItemToCart(modalItem)}
           />
         ) : null}
 
         {modalVisibleCart ? (
           <ModalCart
             item={modalCart}
+            itemCart={cartState}
             onCloseModalCart={this.onCloseModalCart}
+            deleteFromCart={this.deleteFromCart}
+            onBuy={this.onBuy}
           />
         ) : null}
+
+        {alertBuy ? <AlertBuy /> : null}
       </div>
     );
   }

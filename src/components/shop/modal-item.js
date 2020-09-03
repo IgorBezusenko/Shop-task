@@ -2,10 +2,8 @@ import React from "react";
 
 import "./store.css";
 
-const ModalItem = ({ item, onCloseModalItem }) => {
-  console.log(item);
+const ModalItem = ({ item, onCloseModalItem, addItemToCart }) => {
   const { name, price, description, image } = item;
-  console.log(name);
 
   return (
     <div className="modal-item" tabIndex="-1">
@@ -24,7 +22,7 @@ const ModalItem = ({ item, onCloseModalItem }) => {
             </button>
           </div>
           <div className="modal-body">
-            <div className="item-image">
+            <div className="item-image-modal">
               <img src={image} alt="cover" />
             </div>
             <ul>
@@ -41,7 +39,11 @@ const ModalItem = ({ item, onCloseModalItem }) => {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              onClick={addItemToCart}
+              type="button"
+              className="btn btn-primary"
+            >
               Add to Cart
             </button>
           </div>

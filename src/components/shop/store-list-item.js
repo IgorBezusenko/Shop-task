@@ -2,23 +2,16 @@ import React, { Component } from "react";
 
 import "./store.css";
 
-// state = { viewItems: "none" };
-
-// onViewItem = () => {
-//   this.setState({
-//     viewItem: "block",
-//   });
-// };
-
-// onCloseViewItem = () => {
-//   this.setState({
-//     viewItem: "none",
-//   });
-// };
-
 export default class ShoesListItem extends Component {
   render() {
-    const { name, price, description, image, onViewModalItem } = this.props;
+    const {
+      name,
+      price,
+      description,
+      image,
+      addItemToCart,
+      onViewModalItem,
+    } = this.props;
 
     return (
       <div className="shoes-list-item">
@@ -34,7 +27,9 @@ export default class ShoesListItem extends Component {
               <button onClick={onViewModalItem} className="btn btn-info mr-2">
                 View
               </button>
-              <button className="btn btn-primary">Add to Cart</button>
+              <button onClick={addItemToCart} className="btn btn-primary">
+                Add to Cart
+              </button>
             </li>
           </ul>
         </div>

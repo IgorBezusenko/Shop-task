@@ -1,7 +1,7 @@
 import React from "react";
 import ShoesListItem from "./store-list-item";
 
-const ShoesList = ({ items, viewItem, onViewModalItem }) => {
+const ShoesList = ({ items, itemCart, addItemToCart, onViewModalItem }) => {
   const element = items.map((item) => {
     const { id, ...itemProps } = item;
 
@@ -9,7 +9,8 @@ const ShoesList = ({ items, viewItem, onViewModalItem }) => {
       <li key={id} className="ml-3 mb-3">
         <ShoesListItem
           {...itemProps}
-          viewItem={viewItem}
+          id={id}
+          addItemToCart={() => addItemToCart(item)}
           onViewModalItem={() => onViewModalItem(item)}
         />
       </li>
