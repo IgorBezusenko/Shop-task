@@ -4,7 +4,13 @@ import "./store.css";
 
 class ModalCart extends Component {
   render() {
-    const { onCloseModalCart, itemCart, deleteFromCart, onBuy } = this.props;
+    const {
+      onCloseModalCart,
+      itemCart,
+      deleteFromCart,
+      onBuy,
+      totalPrice,
+    } = this.props;
 
     const element = itemCart.map((cart, index) => {
       const { id, name, price } = cart;
@@ -40,20 +46,23 @@ class ModalCart extends Component {
                 <i className="fa fa-window-close"></i>
               </button>
             </div>
-            <div className="modal-body">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>{element}</tbody>
-              </table>
+            <div className="modal-body modal-body-cart">
+              <div className="modal-body-text">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>{element}</tbody>
+                </table>
+              </div>
             </div>
             <div className="modal-footer">
+              <span className="mr-3">Tottal price: {totalPrice}$</span>
               <button onClick={onBuy} type="button" className="btn btn-primary">
                 Buy
               </button>

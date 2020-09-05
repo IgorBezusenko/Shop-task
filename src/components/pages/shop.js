@@ -121,12 +121,13 @@ export default class ShoesStore extends Component {
       (total, el) => total + el.price,
       totalItem
     );
+    const countItem = cartState.filter((item) => item.price).length;
 
     return (
       <div className="container">
         <ShoesHeader
           items={shoesState}
-          totalPrice={itemPrice}
+          countItem={countItem}
           onViewModalCart={this.onViewModalCart}
         />
 
@@ -152,6 +153,7 @@ export default class ShoesStore extends Component {
             onCloseModalCart={this.onCloseModalCart}
             deleteFromCart={this.deleteFromCart}
             onBuy={this.onBuy}
+            totalPrice={itemPrice}
           />
         ) : null}
 
