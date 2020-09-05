@@ -52,6 +52,7 @@
   position: fixed;
   top: 5%;
   right: 7%;
+  z-index: 1051;
 }
 
 ul {
