@@ -11,17 +11,17 @@ const NavList = () => {
                 </Link>
             </li>
             <li className="list-group-item item ">
-                <Link to="/counter">
+                <Link to="/Shop-task/counter">
                     <h4>Counter</h4>
                 </Link>
             </li>
             <li className="list-group-item item ">
-                <Link to="/todoApp">
+                <Link to="/Shop-task/todoApp">
                     <h4>Todo App</h4>
                 </Link>
             </li>
             <li className="list-group-item item ">
-                <Link to="/shoes-store">
+                <Link to="/Shop-task/shoes-store">
                     <h4>Shoes Store</h4>
                 </Link>
             </li>
