@@ -5,14 +5,15 @@ import Counter from "./pages/counter";
 import TodoApp from "./pages/todo";
 import Header from "./header";
 import ShoesStore from "./pages/shop";
-import NavList from "./nav-list";
+import {Main} from "./pages/main";
 
 const App = () => {
   return (
     <Router>
       <Header />
       <div className="d-flex ">
-        <Route path="/" exact component={NavList} />
+        <Route path="/" exact component={Main} />
+        <Route path="/Shop-task"  component={Main} />
         <Route path="/counter" component={Counter} />
         <Route path="/todoApp" component={TodoApp} />
         <Route path="/shoes-store" component={ShoesStore} />

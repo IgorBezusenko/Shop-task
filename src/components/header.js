@@ -1,14 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import NavList from "./nav-list";
 
 const Header = () => {
-  return (
-    <div className="container d-flex flex-column mb-5">
-      <Link to="/">
-        <h3 className="mr-5 ml-5">Home Page</h3>
-      </Link>
-    </div>
-  );
+    const [isBurger, setIsBurger] = useState(false)
+    const [isOpenMenu, setIsOpenMenu] = useState(false)
+    const width = window && window.innerWidth<768
+    useEffect(() => {
+        if (width) {
+            setIsBurger(true)
+        }
+    }, [width])
+    return (
+        <div style={{position:"relative"}}>
+            {isBurger ? <>
+                    <button onClick={() => setIsOpenMenu(true)} className='btn btn-primary'>Menu open</button>
+                    {isOpenMenu && <div style={{ width:"100%", background:"wheat", zIndex:"10000", position:"absolute", top:0, right:0}}>
+                        <button onClick={() => setIsOpenMenu(false)} className='btn btn-primary'>Х</button>
+                        <NavList/></div>}</> :
+                <NavList/>}
+        </div>
+    );
 };
 
 export default Header;
+
