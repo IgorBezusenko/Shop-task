@@ -13,10 +13,10 @@ const App = () => {
       <Header />
       <div className="d-flex ">
         <Route path="/" exact component={Main} />
-        <Route path="/Shop-task"  component={Main} />
-        <Route path="/counter" component={Counter} />
-        <Route path="/todoApp" component={TodoApp} />
-        <Route path="/shoes-store" component={ShoesStore} />
+        <Route path="/Shop-task" exact component={Main} />
+        <Route path="/Shop-task/counter" component={Counter} />
+        <Route path="/Shop-task/todoApp" component={TodoApp} />
+        <Route path="/Shop-task/shoes-store" component={ShoesStore} />
       </div>
     </Router>
   );
