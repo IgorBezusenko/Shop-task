@@ -1,25 +1,32 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import NavList from "./nav-list";
 
 const Header = () => {
-    const [isBurger, setIsBurger] = useState(false)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
-    const width = window && window.innerWidth<768
-    useEffect(() => {
-        if (width) {
-            setIsBurger(true)
-        }
-    }, [width])
-    return (
-        <div style={{position:"relative"}}>
-            {isBurger ? <>
+    const handlerClose = () => setIsOpenMenu(false)
+    return (<div className='container'>
+            <div className='nav-mobile'>
+                <div className=' d-flex justify-content-between py-2'><a href="/Shop-task"><h3>Logo</h3></a>
                     <button onClick={() => setIsOpenMenu(true)} className='btn btn-primary'>Menu open</button>
-                    {isOpenMenu && <div style={{ width:"100%", background:"wheat", zIndex:"10000", position:"absolute", top:0, right:0}}>
-                        <button onClick={() => setIsOpenMenu(false)} className='btn btn-primary'>Х</button>
-                        <NavList/></div>}</> :
-                <NavList/>}
-        </div>
-    );
+                </div>
+                {isOpenMenu && <div  style={{
+                    width: "100%",
+                    height: "100%",
+                    background: "#95a5a6",
+                    zIndex: "10000",
+                    position: "fixed",
+                    top: 0,
+                    right: 0
+                }}
+                >
+                    <div className=' container d-flex justify-content-end py-2'>
+                        <button onClick={handlerClose} className='btn btn-primary'>Х</button>
+                    </div>
+                    <NavList close={handlerClose}/>
+                </div>}
+            </div>
+            <div className="nav-desktop"><NavList/></div>
+        </div>);
 };
 
 export default Header;
